@@ -1,26 +1,28 @@
-﻿using System.Linq.Expressions;
+﻿
+using Core.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
+using System.Linq.Expressions;
 
 namespace Core.Repositories.EntityFramework;
 
-public class EfRepositoryBase
-{
-    public class EfRepositoryBase<TEntity, TEntityId, TContext> : IRepository<TEntity, TEntityId>
+    public abstract class EfRepositoryBase<TEntity, TEntityId, TContext> : IRepository<TEntity, TEntityId>
     where TEntity : BaseEntity<TEntityId>
     where TContext : DbContext
     {
 
-        protected readonly TContext Context;
+        protected readonly TContext Context; // sadece inh alınacağı sınıflarda geçerli olması için protected alındı.
 
-        public EfRepositoryBase(TContext context)
+        public EfRepositoryBase(TContext context)// cons
         {
             Context = context;
         }
 
-        public IQueryable<TEntity> Query() => Context.Set<TEntity>();
+        public IQueryable<TEntity> Query() => Context.Set<TEntity>(); // get işlemleri için
 
         public TEntity Add(TEntity entity)
         {
-            entity.CreatedDate = DateTime.UtcNow;
+            entity.CreatedDate = DateTime.UtcNow; 
             Context.Add(entity);
             Context.SaveChanges();
             return entity;
@@ -39,7 +41,7 @@ public class EfRepositoryBase
             IQueryable<TEntity> queryable = Query();
             if (include != null)
                 queryable = include(queryable);
-            return queryable.FirstOrDefault(predicate);
+            return queryable.FirstOrDefault(predicate);// ilk veriyi veya defaultu çağırır
         }
 
         public List<TEntity> GetAll(Expression<Func<TEntity, bool>> predicate = null, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null)
@@ -57,8 +59,8 @@ public class EfRepositoryBase
         {
             entity.UpdatedDate = DateTime.UtcNow;
             Context.Update(entity);
-            Context.SaveChanges();
+            Context.SaveChanges(); // işlemleri kalıcı olarak veri tabanına kaydetti
             return entity;
         }
+
     }
-}
