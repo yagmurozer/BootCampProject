@@ -5,9 +5,9 @@ using Repositories.Concrete.EntityFramework.Context;
 
 namespace Repositories.Concrete.EntityFramework;
 
-public class InstructorRepository : EfRepositoryBase<Instructor, Guid, BaseDbContext>, IInstructorRepository
+public class BlackListRepository : EfRepositoryBase<BlackList, Guid, BaseDbContext>, IBlackListRepository
 {
-    public InstructorRepository(BaseDbContext context) : base(context)
+    public BlackListRepository(BaseDbContext context) : base(context)
     {
 
     }

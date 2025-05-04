@@ -5,9 +5,9 @@ using Repositories.Concrete.EntityFramework.Context;
 
 namespace Repositories.Concrete.EntityFramework;
 
-public class InstructorRepository : EfRepositoryBase<Instructor, Guid, BaseDbContext>, IInstructorRepository
+public class ApplicantionRepository : EfRepositoryBase<Application, Guid, BaseDbContext>, IApplicationRepository
 {
-    public InstructorRepository(BaseDbContext context) : base(context)
+    public ApplicantionRepository(BaseDbContext context) : base(context)
     {
 
     }
