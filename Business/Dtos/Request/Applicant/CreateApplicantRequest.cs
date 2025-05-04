@@ -1,6 +1,7 @@
 ﻿
 namespace Business.Dtos.Request.Applicant;
 
-public class CreateApplicationRequest
+public class CreateApplicantRequest
 {
+    public string Name { get; set; }
 }
