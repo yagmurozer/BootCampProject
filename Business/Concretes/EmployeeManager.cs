@@ -1,5 +1,7 @@
 ﻿
 using Business.Abstracts;
+using Business.Dtos.Request.Employees;
+using Business.Dtos.Response.Employees;
 using Entities;
 using Repositories.Abstract;
 
@@ -14,32 +16,27 @@ public class EmployeeManager : IEmployeeService
         this.employeeRepository = employeeRepository;
     }
 
-    public void Add(Employee employee)
+    public CreatedEmployeeResponse Add(CreateEmployeeRequest request)
     {
         throw new NotImplementedException();
     }
 
-    public void Delete(int id)
+    public DeletedEmployeeResponse Delete(DeleteEmployeeRequest request)
     {
         throw new NotImplementedException();
     }
 
-    public Employee Get(int id)
+    public GetEmployeeByIdResponse GetById(GetEmployeeByIdRequest request)
     {
         throw new NotImplementedException();
     }
 
-    public List<Employee> GetAll()
+    public List<GetListEmployeeResponse> GetList()
     {
         throw new NotImplementedException();
     }
 
-    public Employee GetByName(string name)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void Update(Employee employee)
+    public UpdatedEmployeeResponse Update(UpdateEmployeeRequest request)
     {
         throw new NotImplementedException();
     }

@@ -1,6 +1,8 @@
 ﻿
 
 using Business.Abstracts;
+using Business.Dtos.Request.Applications;
+using Business.Dtos.Response.Applications;
 using Entities;
 using Repositories.Abstract;
 
@@ -15,32 +17,27 @@ public class ApplicationManager : IApplicationService
         this.applicantRepository = applicantRepository;
     }
 
-    public void Add(Application application)
+    public CreatedApplicationResponse Add(CreateApplicationRequest request)
     {
         throw new NotImplementedException();
     }
 
-    public void Delete(int id)
+    public DeletedApplicationResponse Delete(DeleteApplicationRequest request)
     {
         throw new NotImplementedException();
     }
 
-    public Application Get(int id)
+    public GetApplicationByIdResponse GetById(GetApplicationByIdRequest request)
     {
         throw new NotImplementedException();
     }
 
-    public List<Application> GetAll()
+    public List<GetListApplicationResponse> GetList()
     {
         throw new NotImplementedException();
     }
 
-    public Application GetByName(string name)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void Update(Application application)
+    public UpdatedApplicationResponse Update(UpdateApplicationRequest request)
     {
         throw new NotImplementedException();
     }

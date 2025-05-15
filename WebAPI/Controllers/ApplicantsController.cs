@@ -1,4 +1,6 @@
 ﻿using Business.Abstracts;
+using Business.Dtos.Request.Applicants;
+using Business.Dtos.Response.Applicants;
 using Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,17 +18,43 @@ public class ApplicantsController : ControllerBase
         _applicantService = applicantService;
     }
 
-    [HttpPost] 
-    public void Add([FromBody] Applicant applicant)
+
+    [HttpPost]
+    public ActionResult<CreatedApplicantResponse> Add([FromBody] CreateApplicantRequest request) // hangi hhtp kodunun döndüğünü action resut ile çalışılır
     {
-        _applicantService.Add(applicant);
+        return Created("", _applicantService.Add(request));
+        // created metot u conr-troller baseden gelir
+    }
+    [HttpGet]
+    public ActionResult<List<GetListApplicantResponse>> GetList()
+    { 
+        return Ok(_applicantService.GetList());
     }
 
-    [HttpGet]
-    public List<Applicant> GetAll()
-
+    // GET: api/Applicants/{id}
+    [HttpGet("{id}")]
+    public ActionResult<GetApplicantByIdResponse> GetById(Guid id)
     {
-        return _applicantService.GetAll();
+        var request = new GetApplicantByIdRequest { Id = id };
+        var result = _applicantService.GetById(request);
+        return Ok(result);
+    }
+
+    // PUT: api/Applicants
+    [HttpPut]
+    public ActionResult<UpdatedApplicantResponse> Update([FromBody] UpdateApplicantRequest request)
+    {
+        var result = _applicantService.Update(request);
+        return Ok(result);
+    }
+
+    // DELETE: api/Applicants/{id}
+    [HttpDelete("{id}")]
+    public ActionResult<DeletedApplicantResponse> Delete(Guid id)
+    {
+        var request = new DeleteApplicantRequest { Id = id };
+        var result = _applicantService.Delete(request);
+        return Ok(result);
     }
 
 }

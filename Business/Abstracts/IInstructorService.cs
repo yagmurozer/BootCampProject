@@ -1,15 +1,16 @@
 ﻿
-using Core.Business;
+using Business.Dtos.Request.Instructors;
+using Business.Dtos.Response.Instructors;
 using Entities;
 
 namespace Business.Abstracts;
 
-public interface IInstructorService : IBaseService<Instructor>
+public interface IInstructorService 
 {
-    void Add(Instructor instructor);
-    List<Instructor> GetAll();
-    Instructor GetByName(string name);
-    void Update(Instructor ınstructor);
-    void Delete(int id);
+    CreatedInstructorResponse Add(CreateInstructorRequest request);
+    List<GetListInstructorResponse> GetList();
+    GetInstructorByIdResponse GetById(GetInstructorByIdRequest request);
+    UpdatedInstructorResponse Update(UpdateInstructorRequest request);
+    DeletedInstructorResponse Delete(DeleteInstructorRequest request);
 
 }

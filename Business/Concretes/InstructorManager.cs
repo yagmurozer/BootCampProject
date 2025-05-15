@@ -1,6 +1,8 @@
 ﻿
 
 using Business.Abstracts;
+using Business.Dtos.Request.Instructors;
+using Business.Dtos.Response.Instructors;
 using Entities;
 using Repositories.Abstract;
 
@@ -15,32 +17,27 @@ public class InstructorManager : IInstructorService
         _instructorRepository = instructorRepository;
     }
 
-    public void Add(Instructor instructor)
+    public CreatedInstructorResponse Add(CreateInstructorRequest request)
     {
         throw new NotImplementedException();
     }
 
-    public void Delete(int id)
+    public DeletedInstructorResponse Delete(DeleteInstructorRequest request)
     {
         throw new NotImplementedException();
     }
 
-    public Instructor Get(int id)
+    public GetInstructorByIdResponse GetById(GetInstructorByIdRequest request)
     {
         throw new NotImplementedException();
     }
 
-    public List<Instructor> GetAll()
+    public List<GetListInstructorResponse> GetList()
     {
         throw new NotImplementedException();
     }
 
-    public Instructor GetByName(string name)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void Update(Instructor ınstructor)
+    public UpdatedInstructorResponse Update(UpdateInstructorRequest request)
     {
         throw new NotImplementedException();
     }

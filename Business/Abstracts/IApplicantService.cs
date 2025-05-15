@@ -1,12 +1,11 @@
 ﻿
-using Business.Dtos.Request.Applicant;
-using Business.Dtos.Response.Applicant;
-using Core.Business;
+using Business.Dtos.Request.Applicants;
+using Business.Dtos.Response.Applicants;
 using Entities;
 
 namespace Business.Abstracts;
 
-public interface IApplicantService : IBaseService<Applicant>
+public interface IApplicantService
 {
 /*    void Add(Applicant applicant);
     List<Applicant> GetAll();
@@ -17,4 +16,9 @@ public interface IApplicantService : IBaseService<Applicant>
     //request response pattern
     CreatedApplicantResponse Add(CreateApplicantRequest request);
     List<GetListApplicantResponse> GetList();
+    GetApplicantByIdResponse GetById(GetApplicantByIdRequest request);
+    UpdatedApplicantResponse Update(UpdateApplicantRequest request);
+    DeletedApplicantResponse Delete(DeleteApplicantRequest request);
+
+
 }

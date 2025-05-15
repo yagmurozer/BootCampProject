@@ -1,14 +1,15 @@
 ﻿
-using Core.Business;
+using Business.Dtos.Request.Bootcamps;
+using Business.Dtos.Response.Bootcamps;
 using Entities;
 
 namespace Business.Abstracts;
 
-public interface IBootcampService : IBaseService<Bootcamp>
+public interface IBootcampService
 {
-    void Add(Bootcamp bootcamp);
-    List<Bootcamp> GetAll();
-    Bootcamp GetByName(string name);
-    void Update(Bootcamp bootcamp);
-    void Delete(int id);
+    CreatedBootcampResponse Add(CreateBootcampRequest request);
+    List<GetListBootcampResponse> GetList();
+    GetBootcampByIdResponse GetById(GetBootcampByIdRequest request);
+    UpdatedBootcampResponse Update(UpdateBootcampRequest request);
+    DeletedBootcampResponse Delete(DeleteBootcampRequest request);
 }

@@ -1,6 +1,8 @@
 ﻿
 
 using Business.Abstracts;
+using Business.Dtos.Request.Bootcamps;
+using Business.Dtos.Response.Bootcamps;
 using Entities;
 using Repositories.Abstract;
 
@@ -15,32 +17,27 @@ namespace Business.Concretes
             this.bootcampRepository = bootcampRepository;
         }
 
-        public void Add(Bootcamp bootcamp)
+        public CreatedBootcampResponse Add(CreateBootcampRequest request)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(int id)
+        public DeletedBootcampResponse Delete(DeleteBootcampRequest request)
         {
             throw new NotImplementedException();
         }
 
-        public Bootcamp Get(int id)
+        public GetBootcampByIdResponse GetById(GetBootcampByIdRequest request)
         {
             throw new NotImplementedException();
         }
 
-        public List<Bootcamp> GetAll()
+        public List<GetListBootcampResponse> GetList()
         {
             throw new NotImplementedException();
         }
 
-        public Bootcamp GetByName(string name)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Bootcamp bootcamp)
+        public UpdatedBootcampResponse Update(UpdateBootcampRequest request)
         {
             throw new NotImplementedException();
         }

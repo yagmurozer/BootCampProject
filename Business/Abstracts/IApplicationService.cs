@@ -1,14 +1,18 @@
 ﻿
-using Core.Business;
+using Business.Dtos.Request.Applicants;
+using Business.Dtos.Request.Applications;
+using Business.Dtos.Response.Applicants;
+using Business.Dtos.Response.Applications;
 using Entities;
 
 namespace Business.Abstracts;
 
-public interface IApplicationService : IBaseService<Application>
+public interface IApplicationService 
 {
-    void Add(Application application);
-    List<Application> GetAll();
-    Application GetByName(string name);
-    void Update(Application application);
-    void Delete(int id);
+    CreatedApplicationResponse Add(CreateApplicationRequest request);
+    List<GetListApplicationResponse> GetList();
+    GetApplicationByIdResponse GetById(GetApplicationByIdRequest request);
+    UpdatedApplicationResponse Update(UpdateApplicationRequest request);
+    DeletedApplicationResponse Delete(DeleteApplicationRequest request);
+
 }

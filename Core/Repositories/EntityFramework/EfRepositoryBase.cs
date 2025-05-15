@@ -36,7 +36,8 @@ namespace Core.Repositories.EntityFramework;
             return entity;
         }
 
-        public TEntity Get(Expression<Func<TEntity, bool>> predicate, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null)
+        public TEntity Get(Expression<Func<TEntity, bool>> predicate, Func<IQueryable<TEntity>, 
+            IIncludableQueryable<TEntity, object>>? include = null)
         {
             IQueryable<TEntity> queryable = Query();
             if (include != null)
@@ -44,7 +45,8 @@ namespace Core.Repositories.EntityFramework;
             return queryable.FirstOrDefault(predicate);// ilk veriyi veya defaultu çağırır
         }
 
-        public List<TEntity> GetAll(Expression<Func<TEntity, bool>> predicate = null, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null)
+        public List<TEntity> GetAll(Expression<Func<TEntity, bool>> predicate = null, Func<IQueryable<TEntity>,
+            IIncludableQueryable<TEntity, object>>? include = null)
         {
             IQueryable<TEntity> queryable = Query();
             if (include != null)

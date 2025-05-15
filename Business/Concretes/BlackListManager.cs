@@ -1,6 +1,8 @@
 ﻿
 
 using Business.Abstracts;
+using Business.Dtos.Request.BlackLists;
+using Business.Dtos.Response.BlackLists;
 using Entities;
 using Repositories.Abstract;
 
@@ -15,32 +17,27 @@ public class BlackListManager : IBlackListService
         this.blackListRepository = blackListRepository;
     }
 
-    public void Add(BlackList blackList)
+    public CreatedBlackListResponse Add(CreateBlackListRequest request)
     {
         throw new NotImplementedException();
     }
 
-    public void Delete(int id)
+    public DeletedBlackListResponse Delete(DeleteBlackListRequest request)
     {
         throw new NotImplementedException();
     }
 
-    public BlackList Get(int id)
+    public GetBlackListByIdResponse GetById(GetBlackListByIdRequest request)
     {
         throw new NotImplementedException();
     }
 
-    public List<BlackList> GetAll()
+    public List<GetListBlackListResponse> GetList()
     {
         throw new NotImplementedException();
     }
 
-    public BlackList GetByName(string name)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void Update(BlackList blackList)
+    public UpdatedBlackListResponse Update(UpdateBlackListRequest request)
     {
         throw new NotImplementedException();
     }

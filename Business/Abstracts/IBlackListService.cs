@@ -1,14 +1,14 @@
 ﻿
-using Core.Business;
+using Business.Dtos.Request.BlackLists;
+using Business.Dtos.Response.BlackLists;
 using Entities;
-
 namespace Business.Abstracts;
 
-public interface IBlackListService : IBaseService<BlackList>
+public interface IBlackListService
 {
-    void Add(BlackList blackList);
-    List<BlackList> GetAll();
-    BlackList GetByName(string name);
-    void Update(BlackList blackList);
-    void Delete(int id);
+    CreatedBlackListResponse Add(CreateBlackListRequest request);
+    List<GetListBlackListResponse> GetList();
+    GetBlackListByIdResponse GetById(GetBlackListByIdRequest request);
+    UpdatedBlackListResponse Update(UpdateBlackListRequest request);
+    DeletedBlackListResponse Delete(DeleteBlackListRequest request);
 }
