@@ -4,9 +4,9 @@ namespace Entities.Enum;
 
 public enum ApplicationState
 {
-    PENDİNG,
+    PENDING,
     APPROVED,
     REJECTED,
     IN_REVIEW,
-    CANCELLED
+    CLOSED
 }
