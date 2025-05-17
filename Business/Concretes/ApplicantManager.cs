@@ -3,6 +3,8 @@ using AutoMapper;
 using Business.Abstracts;
 using Business.Dtos.Request.Applicants;
 using Business.Dtos.Response.Applicants;
+using Business.Rules;
+using Core.Exceptions.Types;
 using Entities;
 using Repositories.Abstract;
 
@@ -12,11 +14,14 @@ public class ApplicantManager : IApplicantService
 {
     private readonly IApplicantRepository _applicantRepository;
     private readonly IMapper _mapper; //Automapper için mapper nesnesi oluşturduk
+    private readonly ApplicantBusinessRules _applicantBusinessRules; //kuralların dahil oluşu
 
-    public ApplicantManager(IApplicantRepository applicantRepository, IMapper mapper)
+
+    public ApplicantManager(IApplicantRepository applicantRepository, IMapper mapper, ApplicantBusinessRules applicantBusinessRules)
     {
         _applicantRepository = applicantRepository;
         _mapper = mapper; //constructora dahil edilmeli
+        _applicantBusinessRules = applicantBusinessRules;
     }
 
 
@@ -52,6 +57,13 @@ public class ApplicantManager : IApplicantService
             //};
         }
 
+        { // burada business rules yazılabilir ama birikmemesi için farklı yapı oluşturulur
+        //var existingApplicant = _applicantRepository.Get(a => a.UserName == request.UserName);
+        //if (existingApplicant != null)
+        //    throw new BusinessException($"{request.UserName} username is used ");
+    }
+        
+        //_applicantBusinessRules.MetotAdı  ile burada if else yapısı kullanmamış oluyoruz.
         //AutoMapper
         Applicant applicant = _mapper.Map<Applicant>(request);// applicant ile requesti mappliyor
         Applicant createdApplicant = _applicantRepository.Add(applicant); //db ye ekledi
