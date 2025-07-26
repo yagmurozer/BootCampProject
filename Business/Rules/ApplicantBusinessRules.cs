@@ -12,33 +12,30 @@ public class ApplicantBusinessRules : BaseBusinessRules
     private readonly IApplicantRepository _applicantRepository;
     private readonly IBlackListRepository _blackListRepository;
 
-
     public ApplicantBusinessRules(IApplicantRepository applicantRepository, IBlackListRepository blackListRepository)
     {
         _applicantRepository = applicantRepository;
         _blackListRepository = blackListRepository;
-
     }
 
-    // metotlar bu kısma yazılır
-    public async Task CheckIfApplicantWithSameIdentityNumberExists(string identityNumber)
+    public void CheckIfApplicantAlreadyExists(string nationalIdentity)
     {
-        var exists = await _applicantRepository.AnyAsync(a => a.IdentityNumber == identityNumber);
-        if (exists)
-            throw new BusinessException("An applicant with the same identity number already exists.");
+        var exists = _applicantRepository.Get(a => a.NationalIdentity == nationalIdentity);
+        if (exists != null)
+            throw new Exception("Aynı TC Kimlik No ile birden fazla başvuru yapılamaz.");
     }
 
-    public async Task CheckIfApplicantIsBlacklisted(Guid applicantId)
+    public void CheckIfBlacklisted(Guid applicantId)
     {
-        var isBlacklisted = await _blackListRepository.IsActiveBlackListEntryExists(applicantId);
-        if (isBlacklisted)
-            throw new BusinessException("Applicant is blacklisted and cannot apply again.");
+        var isBlacklisted = _blackListRepository.Get(b => b.ApplicantId == applicantId);
+        if (isBlacklisted != null)
+            throw new Exception("Kara listeye alınan bir başvuru sahibi yeni başvuru yapamaz.");
     }
 
-    public async Task CheckIfApplicantExists(Guid applicantId)
+    public void CheckIfApplicantExists(Guid applicantId)
     {
-        var applicant = await _applicantRepository.GetByIdAsync(applicantId);
-        if (applicant == null)
-            throw new BusinessException("Applicant does not exist.");
+        var exists = _applicantRepository.Get(a => a.Id == applicantId);
+        if (exists == null)
+            throw new Exception("Sistemde kayıtlı olmayan bir başvuru sahibi ile işlem yapılamaz.");
     }
 }

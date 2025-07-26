@@ -12,7 +12,7 @@ namespace Core.Exceptions.Handlers
                 BusinessException businessException => HandleException(businessException), //bbusinessexception türünde exception varsa businessexceptionı çağır
                 _ => HandleException(exception)  //_ ile işin sonunda return edilecek alanı belirtir. bunların hiçbiri ise exceptionı çağır
             };
-
+        
         //işleyecek metotlar
         protected abstract Task HandleException(BusinessException businessException); // buiness çalışıyorsa bu metot handle edecek
         protected abstract Task HandleException(Exception exception);

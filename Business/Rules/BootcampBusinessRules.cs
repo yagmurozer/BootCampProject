@@ -8,7 +8,7 @@ using Entities.Enum;
 
 namespace Business.Rules;
 
-public class BootcampBusinessRules : BaseBusinessRules
+public class BootcampBusinessRules:BaseBusinessRules
 {
     private readonly IBootcampRepository _bootcampRepository;
     private readonly IInstructorRepository _instructorRepository;
@@ -19,31 +19,31 @@ public class BootcampBusinessRules : BaseBusinessRules
         _instructorRepository = instructorRepository;
     }
 
-    public void CheckIfStartDateIsBeforeEndDate(DateTime startDate, DateTime endDate)
+    public void CheckStartDateBeforeEndDate(DateTime start, DateTime end)
     {
-        if (startDate >= endDate)
-            throw new BusinessException("Bootcamp start date must be before end date.");
+        if (start >= end)
+            throw new Exception("Başlangıç tarihi bitiş tarihinden önce olmalıdır.");
     }
 
-    public async Task CheckIfBootcampNameAlreadyExists(string name)
+    public void CheckIfBootcampNameExists(string name)
     {
-        var exists = await _bootcampRepository.AnyAsync(b => b.Name == name);
-        if (exists)
-            throw new BusinessException("A bootcamp with the same name already exists.");
+        var exists = _bootcampRepository.Get(b => b.Name == name);
+        if (exists != null)
+            throw new Exception("Aynı isimde bir bootcamp daha önce açılmış.");
     }
 
-    public async Task CheckIfInstructorExists(Guid instructorId)
+    public void CheckIfInstructorExists(Guid instructorId)
     {
-        var instructor = await _instructorRepository.GetByIdAsync(instructorId);
-        if (instructor == null)
-            throw new BusinessException("Instructor does not exist.");
+        var exists = _instructorRepository.Get(i => i.Id == instructorId);
+        if (exists == null)
+            throw new Exception("Eğitmen sistemde kayıtlı değil.");
     }
 
-    public async Task CheckIfBootcampIsOpenForApplication(Guid bootcampId)
+    public void CheckIfBootcampIsOpen(Guid bootcampId)
     {
-        var bootcamp = await _bootcampRepository.GetByIdAsync(bootcampId);
+        var bootcamp = _bootcampRepository.Get(b => b.Id == bootcampId);
+
         if (bootcamp == null || bootcamp.BootcampState == BootcampState.CANCELLED)
-            throw new BusinessException("Bootcamp is not accepting applications.");
+            throw new Exception($"Bootcamp durumu '{bootcamp.BootcampState}' olduğu için başvuru alınamaz.");
     }
-
 }

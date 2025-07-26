@@ -11,6 +11,8 @@ namespace Entities
         public Guid ApplicantId { get; set; }
         public Guid BootcampId { get; set; }
         public ApplicationState ApplicationState { get; set; }
+        
+        
         // Navigation properties
         public virtual Applicant Applicant { get; set; }
         public virtual Bootcamp Bootcamp { get; set; }

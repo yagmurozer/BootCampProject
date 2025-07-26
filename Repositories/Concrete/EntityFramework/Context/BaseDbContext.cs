@@ -6,7 +6,7 @@ using System.Reflection;
 namespace Repositories.Concrete.EntityFramework.Context;
 
 public class BaseDbContext : DbContext
-{ // databasedeki allanları burada mapliyoruz
+{ // databasedeki tabloları burada mapliyoruz
     protected IConfiguration Configuration { get; set; } // programda kullandık
     public DbSet<Instructor> Instructors { get; set; }
     public DbSet<Applicant> Applicants { get; set; }

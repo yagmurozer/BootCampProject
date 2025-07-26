@@ -11,7 +11,7 @@ namespace Core.Repositories.EntityFramework;
     where TContext : DbContext
     {
 
-        protected readonly TContext Context; // sadece inh alınacağı sınıflarda geçerli olması için protected alındı.
+        protected readonly TContext Context; // sadece inherit alınacağı sınıflarda geçerli olması için protected alındı.
 
         public EfRepositoryBase(TContext context)// cons
         {

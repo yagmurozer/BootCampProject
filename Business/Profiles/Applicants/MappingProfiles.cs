@@ -10,7 +10,7 @@ public class MappingProfiles : Profile
 {
     public MappingProfiles()
     {
-        // map oluştur 
+        // map oluştur CreateMap<TSource, TDestination>
         CreateMap<Applicant, CreateApplicantRequest>().ReverseMap();
         CreateMap<Applicant, CreatedApplicantResponse>().ReverseMap();
 

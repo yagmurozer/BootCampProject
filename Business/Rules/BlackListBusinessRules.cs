@@ -7,7 +7,7 @@ using Repositories.Concrete.EntityFramework;
 
 namespace Business.Rules;
 
-public class BlackListBusinessRules : BaseBusinessRules
+public class BlackListBusinessRules: BaseBusinessRules
 {
     private readonly IBlackListRepository _blackListRepository;
 
@@ -16,17 +16,16 @@ public class BlackListBusinessRules : BaseBusinessRules
         _blackListRepository = blackListRepository;
     }
 
-    public async Task CheckIfActiveBlacklistExists(Guid applicantId)
+    public void CheckIfBlackListAlreadyExists(Guid applicantId)
     {
-        var exists = await _blackListRepository.IsActiveBlackListEntryExists(applicantId); //bu metotları repoda da belirtmeliyiz.
-        if (exists)
-            throw new BusinessException("Applicant already has an active blacklist entry.");
+        var exists = _blackListRepository.Get(b => b.ApplicantId == applicantId);
+        if (exists != null)
+            throw new Exception("Aynı aday için birden fazla aktif kara liste kaydı olamaz.");
     }
 
-    public void CheckIfReasonIsProvided(string reason)
+    public void CheckIfReasonProvided(string reason)
     {
         if (string.IsNullOrWhiteSpace(reason))
-            throw new BusinessException("Reason for blacklist entry cannot be empty.");
+            throw new Exception("Kara listeye alma sebebi boş bırakılamaz.");
     }
-
 }

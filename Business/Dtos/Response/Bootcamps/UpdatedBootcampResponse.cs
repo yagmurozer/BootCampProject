@@ -6,4 +6,6 @@ public class UpdatedBootcampResponse
     public string Description { get; set; }
     public DateTime EndDate { get; set; }
     public DateTime UpdatedDate { get; set; }
+    public DateTime StartDate { get; set; }
+
 }

@@ -1,7 +1,8 @@
-﻿
+﻿using Business.Concretes;
 using Business.Rules;
 using Core.Extentions;
 using Core.Rules;
+using Core.Security.JWT;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
@@ -9,15 +10,14 @@ namespace Business;
 
 public static class BusinessServiceRegistration
 {
-    public static IServiceCollection AddBusinessServices(this IServiceCollection services) // bu şekilde IServiceCollectionı genişletmiş oluyoruz
+    public static IServiceCollection AddBusinessServices(this IServiceCollection services)
     {
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
-        services.RegistrationAssemblyTypes(Assembly.GetExecutingAssembly()).Where(t => t.ServiceType.Name.EndsWith("Manager"));
 
-        //business rulesları register etmeliyiz. sürekli addScoped yazmamak için AssemblyTypeRegistrationa yeni metotu burada çağırdık
+        services.AddScoped<ITokenHelper, JwtHelper>();
+
+        services.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).Where(t => t.ServiceType.Name.EndsWith("Manager"));
         services.AddSubClassesOfType(Assembly.GetExecutingAssembly(), typeof(BaseBusinessRules));
-
-        return services;   
+        return services;
     }
-
 }
